@@ -6,12 +6,13 @@ import (
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-
+		
 }
 
 func main() {
-	http.HandleFunc("/", indexHandler)
+	fs := http.FileServer(http.Dir("./"))
+	http.Handle("/", http.StripPrefix("/static/", fs))
 
-	fmt.Println("Listening on port 8080")
+	fmt.Println("Listening on port 8080 http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
