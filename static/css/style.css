@@ -1,0 +1,23 @@
+header {
+    background-image: url('alone-tree-sunset-qe-1920x1080.jpg');
+    text-align: center;
+    padding: 10px;
+}
+
+body {
+    background-image: url('../../templates/alone-tree-sunset-qe-2880x1800.jpg');
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+div.artistes-container {
+    background-color: lightgrey;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
