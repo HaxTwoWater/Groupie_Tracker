@@ -1,13 +1,20 @@
-package server
+package main
 
 import (
 	"fmt"
+	"grp/internal/handlers"
+	"log"
 	"net/http"
 )
 
-func Start() {
-	http.Handle("/", http.FileServer(http.Dir("./templates")))
+func main() {
+	mux := http.NewServeMux()
 
-	fmt.Println("Starting server and listening on port 8080 -> http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	mux.HandleFunc("/", handlers.HomeHandler)
+
+	fs := http.FileServer(http.Dir("web/static"))
+	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	fmt.Println("Server running at http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
