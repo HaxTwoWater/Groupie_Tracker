@@ -6,7 +6,11 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/.idea/
 /.vscode/
 /extensions.json
+<<<<<<< HEAD
 /.idea/
 /go.mod/
+=======
+>>>>>>> 9ed35869eb8ca437472023988f62048a04e79fe0
