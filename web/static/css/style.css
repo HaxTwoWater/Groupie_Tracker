@@ -26,7 +26,7 @@ div.nav {
 
 
 body {
-    background-image: url('../../web/templates/alone-tree-sunset-qe-2880x1800.jpg');
+    background-image: url('../../static/img/background-img-index.jpg');
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
