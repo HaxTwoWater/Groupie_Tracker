@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-var homeTpl = template.Must(template.ParseFiles("web/templates/home.html"))
+var homeTpl = template.Must(template.ParseFiles("web/templates/index.html"))
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
