@@ -2,12 +2,12 @@ package server
 
 import (
 	"fmt"
-	"grp/internal/handlers"
+	"groupie_tracker/internal/handlers"
 	"log"
 	"net/http"
 )
 
-func main() {
+func Start() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", handlers.HomeHandler)
