@@ -2,10 +2,11 @@ header {
     font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 10px;
+    background-color: rgba(0, 120, 255, 0.3);
 }
 
 div.title {
-    font-size: 25px;
+    font-size: 15px;
     color : white;
     font-family: 'Arial', sans-serif;
     -webkit-text-stroke-width: 1px;
@@ -16,11 +17,17 @@ div.title {
 
 div.nav {
     display: flex;
-  justify-content: space-between; /* espace égal entre les boutons */
+  justify-content: space-between; 
   align-items: center;
-  width: 80%;          /* ajuste selon ton design */
-  margin: 0 auto;      /* centre le groupe */
+  width: 80%;          
+  margin: 0 auto;     
   
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    gap: 20%; 
 }
 
 .btn {
