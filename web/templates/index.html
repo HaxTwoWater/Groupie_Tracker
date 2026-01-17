@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GroupieTrackerSansGroupie</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<header>
+<body class="min-h-screen bg-gradient-to-r from-blue-950 to-purple-950 text-white antialiased  ">
+<header class="">
     <div id="title" class ="title">
-        <h1>Welcome to the website Groupie tracker sans Groupie</h1>
+        <h1 class="text-4xl font-bold">Welcome to the website Groupie tracker sans Groupie</h1>
     </div>
     <div id="nav" class="nav"></div>
         <nav>
-            <ul>
-                <button class="btn">
+            <ul class="flex justify-center space-x-10 justify-center">
+                <button class="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 active:scale-95">
                     <href="/">Home</href>
                 </button>
-                <button class="btn">
+               <button class="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 active:scale-95">
                     <href="/artists">Artists</href>
                 </button>
-                <button class="btn">
+                <button class="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 active:scale-95">
                     <href="/live">Live</href>
                 </button>
                 <div class="search-bar">
@@ -29,7 +30,6 @@
         </nav>
     </div>
 </header>
-<body>
     <div id="artistes-container" class="artistes-container">
         <div class="artist1">
             test
