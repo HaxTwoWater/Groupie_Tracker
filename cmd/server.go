@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"groupie_tracker/interal/render"
 	"groupie_tracker/internal/handlers"
+	"groupie_tracker/internal/render"
 )
 
 func Start() {
