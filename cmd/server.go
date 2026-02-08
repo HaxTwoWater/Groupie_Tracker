@@ -2,9 +2,11 @@ package server
 
 import (
 	"fmt"
-	"groupie_tracker/internal/handlers"
 	"log"
 	"net/http"
+
+	"groupie_tracker/interal/render"
+	"groupie_tracker/internal/handlers"
 )
 
 func Start() {
