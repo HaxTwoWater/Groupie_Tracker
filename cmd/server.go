@@ -10,14 +10,17 @@ import (
 )
 
 func Start() {
-	mux := http.NewServeMux()
+	v, err := render.New("web/templates/*.html")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	mux.HandleFunc("/", handlers.HomeHandler)
+	mux := http.NewServeMux()
 
 	fs := http.FileServer(http.Dir("web/static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	mux.HandleFunc("/", handlers.Page(v, "home.html"))
+	mux.HandleFunc("/", handlers.Home(v))
 
 	fmt.Println("Server running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
