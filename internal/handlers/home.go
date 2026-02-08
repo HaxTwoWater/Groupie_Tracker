@@ -1,21 +1,21 @@
 package handlers
 
 import (
-	"html/template"
 	"net/http"
+
+	"groupie_tracker/internal/render"
 )
 
-var homeTpl = template.Must(template.ParseFiles("web/templates/index.html"))
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-
-	err := homeTpl.Execute(w, nil)
-	if err != nil {
-		http.Error(w, "Template error", http.StatusInternalServerError)
-		return
+func Home(v *render.View) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			w.WriteHeader(http.StatusNotFound)
+			v.Render(w, "error.html", map[string]any{
+				"Code":    404,
+				"Message": "Page introuvable",
+			})
+			return
+		}
+		v.Render(w, "home.html", map[string]any{})
 	}
 }
