@@ -21,6 +21,9 @@ func Start() {
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	mux.HandleFunc("/", handlers.Home(v))
+	mux.HandleFunc("/artists", handlers.Artists(v))
+	mux.HandleFunc("/details", handlers.Details(v))
+	mux.HandleFunc("/live", handlers.Live(v))
 
 	fmt.Println("Server running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
