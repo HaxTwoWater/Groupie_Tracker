@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"groupie_tracker/internal/api"
 	"log"
 	"net/http"
 
@@ -15,14 +16,16 @@ func Start() {
 		log.Fatal(err)
 	}
 
+	apiClient := api.NewClient()
+
 	mux := http.NewServeMux()
 
 	fs := http.FileServer(http.Dir("web/static"))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	mux.HandleFunc("/", handlers.Home(v))
-	mux.HandleFunc("/artists", handlers.Artists(v))
-	mux.HandleFunc("/details", handlers.Details(v))
+	mux.HandleFunc("/artists", handlers.Artists(v, apiClient))
+	mux.HandleFunc("/artist", handlers.Artist(v, apiClient))
 	mux.HandleFunc("/live", handlers.Live(v))
 	mux.HandleFunc("/filter", handlers.Filter(v))
 
