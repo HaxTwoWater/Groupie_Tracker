@@ -1,0 +1,21 @@
+package handlers
+
+import (
+	"net/http"
+
+	"groupie_tracker/internal/render"
+)
+
+func Filter(v *render.Render) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/filter" {
+			w.WriteHeader(http.StatusNotFound)
+			v.Render(w, "error.html", map[string]any{
+				"Code":    404,
+				"Message": "Page introuvable",
+			})
+			return
+		}
+		v.Render(w, "filter.html", map[string]any{})
+	}
+}
