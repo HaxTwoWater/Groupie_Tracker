@@ -1,22 +1,66 @@
 <!DOCTYPE html>
-<html lang="UTF-8">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GroupieTrackerSansGroupie</title>
+    <title>Groupie Tracker - Live Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    
+    <style>
+        .map-tiles {
+            filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+        }
+        .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+        }
+    </style>
 </head>
-<header>
-    <h1>Welcome to the website Groupie tracker sans Groupie</h1>
-    <nav>
-        <ul>
-            <a href="/index.html">Accueil</a>
-            <a href="/artists.html">Artists</a>
-            <a href="/live.html">Live Concert</a>
-        </ul>
-        <input type="search" id="site-search" name="q" />
-    </nav>
-</header>
-<body>
-    <h1></h1>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white antialiased font-sans flex flex-col">
+
+    <header class="container mx-auto px-6 py-8">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4">
+                Groupie tracker sans Groupie
+            </h1>
+        </div>
+        <nav class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-xl max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <ul class="flex space-x-2 md:space-x-4">
+                    <li><a href="/" class="block px-4 py-2 hover:bg-white/10 text-white font-semibold rounded-lg transition">Home</a></li>
+                    <li><a href="/artists" class="block px-4 py-2 hover:bg-white/10 text-white font-semibold rounded-lg transition">Artists</a></li>
+                    <li><a href="/live" class="block px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg transition shadow-lg">Live</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto px-6 mb-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-white border-l-4 border-indigo-500 pl-4 mb-8">
+                Concert Map
+            </h2>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-xl h-[600px] relative z-0">
+                <div id="map" class="w-full h-full rounded-xl z-0 outline-none"></div>
+            </div>
+        </div>
+    </main>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="/static/js/script.js"></script>
+
+    <script>
+        const dataFromGo = [
+            {{range .}}
+            "{{.}}",
+            {{end}}
+        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap(dataFromGo);
+        });
+    </script>
 </body>
 </html>
