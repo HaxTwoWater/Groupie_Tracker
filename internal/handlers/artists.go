@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strings"
 
 	"groupie_tracker/internal/api"
 	"groupie_tracker/internal/render"
@@ -28,6 +29,30 @@ func Artists(v *render.Render, apiClient *api.Client) http.HandlerFunc {
 			return
 		}
 
+		q := strings.TrimSpace(r.URL.Query().Get("q"))
+		if q != "" {
+			artists = filterArtists(artists, q)
+		}
+
 		v.Render(w, "artists.html", artists)
 	}
+}
+
+func filterArtists(artists []models.Artist, q string) []models.Artist {
+	q = strings.ToLower(q)
+	out := make([]models.Artist, 0)
+
+	for _, a := range artists {
+		if strings.Contains(strings.ToLower(a.Name), q) {
+			out = append(out, a)
+			continue
+		}
+		for _, m := range a.Members {
+			if strings.Contains(strings.ToLower(m), q) {
+				out = append(out, a)
+				break
+			}
+		}
+	}
+	return out
 }
