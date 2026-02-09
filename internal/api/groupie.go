@@ -36,3 +36,18 @@ func (c *Client) GetArtists() ([]models.Artist, error) {
 	}
 	return artists, nil
 }
+
+func (c *Client) GetRelations() (models.RelationsResponse, error) {
+	resp, err := c.http.Get("https://groupietrackers.herokuapp.com/api/relation")
+	if err != nil {
+		return models.RelationsResponse{}, err
+	}
+	defer resp.Body.Close()
+
+	var rel models.RelationsResponse
+	if err := json.NewDecoder(resp.Body).Decode(&rel); err != nil {
+		return models.RelationsResponse{}, err
+	}
+
+	return rel, nil
+}
