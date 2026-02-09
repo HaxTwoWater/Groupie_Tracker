@@ -1,12 +1,17 @@
-function initMap(locations) {
+function normalizeLocation(loc) {
+    return String(loc || "").replaceAll("_", " ").replaceAll("-", " ").trim();
+}
 
-    console.log("Starting the map with the cities:", locations);
+async function geocodeOSM(query) {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) return null;
+    return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+}
 
-    if (!document.getElementById('map')) {
-        console.error("Error: No div id='map' found!");
-        return;
-    }
-
+function initMap(markersData) {
     var map = L.map('map').setView([48.8566, 2.3522], 4);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -15,36 +20,24 @@ function initMap(locations) {
         className: 'map-tiles'
     }).addTo(map);
 
-    async function addMarker(city) {
-        const query = city.replace(/-/g, ' ').replace(/_/g, ' ');
+    async function addMarker(item) {
+        const query = normalizeLocation(item.location);
+        const geo = await geocodeOSM(query);
+        if (!geo) return;
 
-        try {
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`
-            );
+        const dates = (item.dates || []).slice(0, 6).join("<br>");
+        const popup = `
+      <div style="color:black">
+        <b>${item.artist}</b><br>
+        <span>${query}</span><br><br>
+        <b>Dates :</b><br>${dates}
+      </div>
+    `;
 
-            const data = await response.json();
-
-            if (data.length > 0) {
-                const lat = parseFloat(data[0].lat);
-                const lon = parseFloat(data[0].lon);
-
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup(`<b style="color:black">${query.toUpperCase()}</b>`);
-            } else {
-                console.warn("City not found :", city);
-            }
-
-        } catch (error) {
-            console.error("API error :", error);
-        }
+        L.marker([geo.lat, geo.lon]).addTo(map).bindPopup(popup);
     }
 
-    if (locations && locations.length > 0) {
-        locations.slice(0, 50).forEach((city, index) => {
-            setTimeout(() => {
-                addMarker(city);
-            }, index * 800);
-        });
-    }
+    (markersData || []).slice(0, 60).forEach((item, i) => {
+        setTimeout(() => addMarker(item), i * 800);
+    });
 }
