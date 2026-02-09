@@ -6,9 +6,9 @@ import (
 	"groupie_tracker/internal/render"
 )
 
-func Home(v *render.Render) http.HandlerFunc {
+func Live(v *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != "/" {
+		if r.URL.Path != "/live" {
 			w.WriteHeader(http.StatusNotFound)
 			v.Render(w, "error.html", map[string]any{
 				"Code":    404,
@@ -16,6 +16,6 @@ func Home(v *render.Render) http.HandlerFunc {
 			})
 			return
 		}
-		v.Render(w, "home.html", map[string]any{})
+		v.Render(w, "live.html", map[string]any{})
 	}
 }
