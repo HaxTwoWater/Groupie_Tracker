@@ -54,10 +54,21 @@
 
     <script>
         const dataFromGo = [
-            {{range .}}
-            "{{.}}",
-            {{end}}
+            {{- range $i, $m := . -}}
+                {{- if $i}},{{end -}}
+                {
+                    location: {{printf "%q" $m.Location}},
+                    artist: {{printf "%q" $m.Artist}},
+                    dates: [
+                        {{- range $j, $d := $m.Dates -}}
+                            {{- if $j}},{{end -}}
+                            {{printf "%q" $d}}
+                        {{- end -}}
+                    ]
+                }
+            {{- end -}}
         ];
+
         document.addEventListener('DOMContentLoaded', () => {
             initMap(dataFromGo);
         });
