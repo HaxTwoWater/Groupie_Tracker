@@ -42,7 +42,7 @@
                     </a>
                 </div>
                 <div class="w-full md:w-72">
-                    <form action="/search" method="GET" class="relative">
+                    <form action="/artists" method="GET" class="relative">
                         <input type="text" name="q" placeholder="Search..." 
                             class="w-full bg-white/5 border border-white/20 rounded-full py-2 px-5 text-sm focus:outline-none focus:border-indigo-500 transition placeholder:text-white/40">
                         <div id="suggestions" class="absolute top-full left-0 w-full mt-2 bg-slate-800 border border-white/10 rounded-xl hidden z-50 overflow-hidden"></div>
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-center">
-                        <a href="/details/{{.Id}}" class="px-8 py-2 bg-white/10 hover:bg-white/20 text-white text-[10px] rounded-full transition duration-300 border border-white/20 uppercase font-black tracking-widest">
+                        <a href="/artist?id={{.Id}}" class="px-8 py-2 bg-white/10 hover:bg-white/20 text-white text-[10px] rounded-full transition duration-300 border border-white/20 uppercase font-black tracking-widest">
                             See more
                         </a>
                     </div>
