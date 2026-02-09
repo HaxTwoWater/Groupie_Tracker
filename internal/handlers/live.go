@@ -36,7 +36,7 @@ func Live(v *render.Render, apiClient *api.Client) http.HandlerFunc {
 
 		artistName := make(map[int]string)
 		for _, a := range artists {
-			artistName[a.ID] = a.Name
+			artistName[a.Id] = a.Name
 		}
 
 		rel, err := apiClient.GetRelations()
