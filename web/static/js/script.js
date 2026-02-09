@@ -14,31 +14,37 @@ function initMap(locations) {
         attribution: '&copy; OpenStreetMap',
         className: 'map-tiles'
     }).addTo(map);
+
     async function addMarker(city) {
         const query = city.replace(/-/g, ' ').replace(/_/g, ' ');
 
         try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`
+            );
+
             const data = await response.json();
 
             if (data.length > 0) {
-                const lat = data[0].lat;
-                const lon = data[0].lon;
+                const lat = parseFloat(data[0].lat);
+                const lon = parseFloat(data[0].lon);
 
                 L.marker([lat, lon]).addTo(map)
                     .bindPopup(`<b style="color:black">${query.toUpperCase()}</b>`);
             } else {
                 console.warn("City not found :", city);
             }
+
         } catch (error) {
             console.error("API error :", error);
         }
     }
+
     if (locations && locations.length > 0) {
-        locations.forEach((city, index) => {
+        locations.slice(0, 50).forEach((city, index) => {
             setTimeout(() => {
                 addMarker(city);
-            }, index * 1000);
+            }, index * 800);
         });
     }
 }
