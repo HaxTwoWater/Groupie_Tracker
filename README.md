@@ -90,3 +90,7 @@ Les endpoints principaux gérés sont :
 
 Auteurs
 Ce projet a été réalisé par : JEANNOT Louis et COURTY Joan
+
+
+
+https://github.com/HaxTwoWater/Groupie_Tracker
