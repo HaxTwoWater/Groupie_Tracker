@@ -94,3 +94,4 @@ Ce projet a été réalisé par : JEANNOT Louis et COURTY Joan
 
 
 https://github.com/HaxTwoWater/Groupie_Tracker
+https://www.notion.so/2c788a324b4480239b14db980bb6517a?v=2c788a324b448029bb98000c05340f8a&source=copy_link
