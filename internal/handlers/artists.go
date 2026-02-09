@@ -6,6 +6,7 @@ import (
 
 	"groupie_tracker/internal/api"
 	"groupie_tracker/internal/render"
+	"groupie_tracker/internal/models"
 )
 
 func Artists(v *render.Render, apiClient *api.Client) http.HandlerFunc {
