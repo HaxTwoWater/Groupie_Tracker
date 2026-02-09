@@ -26,7 +26,7 @@ func Start() {
 	mux.HandleFunc("/", handlers.Home(v))
 	mux.HandleFunc("/artists", handlers.Artists(v, apiClient))
 	mux.HandleFunc("/artist", handlers.Artist(v, apiClient))
-	mux.HandleFunc("/live", handlers.Live(v))
+	mux.HandleFunc("/live", handlers.Live(v, apiClient))
 	mux.HandleFunc("/filter", handlers.Filter(v))
 
 	fmt.Println("Server running at http://localhost:8080")
